@@ -5,6 +5,33 @@
 
 ==============================================================================
 
+Erase-remove idiom                            *erase-remove* ~
+
+The std::remove algorithm does not eliminate elements from a container; it
+simply moves the elements not being removed to the front of the container,
+leaving the contents at the end of the container undefined. This is because
+std::remove works only using a pair of forward iterators, and the generic
+concept of forward iterators does not know how to eliminate data elements from
+an arbitrary data structure. Only container member functions can eliminate
+container elements, as only members know the details of the internal data
+structure. The Erase-Remove idiom is used to remove and eliminate data
+elements from a container.
+
+>
+    std::vector<int> v{1, 2, 3, 4, 5, 6, 7, 8};
+
+    auto isOdd = [](int x) { return a % 2 == 1; };
+    v.erase(std::remove_if(v.begin(), v.end(), isOdd), v.end());
+<
+|C++20| adds std::erase and std::erase_if which accomplish the same goal.
+
+>
+    std::erase_if(v.begin(), v.end(), isOdd);
+<
+https://en.wikibooks.org/wiki/More_C++_Idioms/Erase-Remove
+https://en.cppreference.com/w/cpp/container/vector/erase2
+
+
 Copy and swap idiom                           *copy-and-swap* ~
 
 Reference: https://stackoverflow.com/a/3279550/3033441
@@ -71,5 +98,13 @@ Rule of three                                 *rule-of-three* ~
 Rule of five                                  *rule-of-five* ~
 
 Strong exception guarantee                    *strong-exception-guarantee* ~
+
+C++14                                         *C++14* ~
+
+C++17                                         *C++17* ~
+
+C++20                                         *C++20* ~
+
+- std::erase, std::erase_if to replace the erase-remove idiom
 
 vim:tw=78:ts=8:noet:ft=help:norl:
