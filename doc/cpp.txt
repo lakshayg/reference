@@ -1,0 +1,75 @@
+*cpp.txt*
+
+
+                             C++ Reference Manual
+
+==============================================================================
+
+Copy and swap idiom                           *copy-and-swap* ~
+
+Reference: https://stackoverflow.com/a/3279550/3033441
+
+Any class that manages a resource (a wrapper, like smart pointer) needs to
+follow the |rule-of-five|. The copy-and-swap idiom helps in avoiding code
+duplication and providing a |strong-exception-guarantee| when implementing
+those functions.
+
+>
+    class array_wrapper
+    {
+      public:
+        array_wrapper(size_t size = 0)
+          : m_size(size)
+          , m_array(m_size ? calloc(m_size, sizeof(int)) : nullptr)
+        {
+        }
+
+        ~array_wrapper()
+        {
+          if (m_size)
+          {
+            free(m_array);
+          }
+        }
+
+        // copy constructor
+        array_wrapper(const array_wrapper& other)
+          : array_wrapper(other.m_size)
+        {
+          std::copy_n(other.m_array, other.m_size, m_array);
+        }
+
+        // move construction using swap
+        array_wrapper(array_wrapper&& other) noexcept
+          : array_wrapper()
+        {
+          swap(*this, other);
+        }
+
+        // copy and move assignment operator using swap
+        array_wrapper& operator=(array_wrapper other) // notice pass-by-value
+        {
+          swap(*this, other);
+          return *this;
+        }
+
+        friend void swap(array_wrapper& a, array_wrapper& b) noexcept
+        {
+          using std::swap; // enable ADL
+          swap(a.m_size, b.m_size);
+          swap(a.m_array, b.m_array);
+        }
+
+      private:
+        size_t m_size;
+        int* m_array;
+    };
+<
+
+Rule of three                                 *rule-of-three* ~
+
+Rule of five                                  *rule-of-five* ~
+
+Strong exception guarantee                    *strong-exception-guarantee* ~
+
+vim:tw=78:ts=8:noet:ft=help:norl:
