@@ -121,6 +121,8 @@ long *__builtin_expect* (long exp, long c)
 
 Branch prediction hint.
 
+void *__builtin_unreachable* (void)
+
 int *__builtin_clz* (unsigned int x)
 int *__builtin_clzl* (unsigned long)
 int *__builtin_clzll* (unsigned long long)
@@ -134,6 +136,14 @@ int *__builtin_ctzll* (unsigned long long)
 
 Returns the number of trailing 0-bits in x, starting at the
 least significant bit position. If x is 0, the result is undefined.
+
+int *__builtin_clrsb* (int x)
+int *__builtin_clrsbl* (long)
+int *__builtin_clrsbll* (long long)
+
+Returns the number of leading redundant sign bits in x, i.e. the
+number of bits following the most significant bit that are identical
+to it. There are no special cases for 0 or other values.
 
 int *__builtin_ffs* (unsigned int x)
 int *__builtin_ffsl* (unsigned long)
@@ -154,7 +164,37 @@ int *__builtin_popcountll* (unsigned long long)
 
 Returns the number of 1-bits in x.
 
+type *__builtin_stdc_bit_ceil* (type arg)
+type *__builtin_stdc_bit_floor* (type arg)
+unsigned int *__builtin_stdc_bit_width* (type arg)
+unsigned int *__builtin_stdc_count_ones* (type arg)
+unsigned int *__builtin_stdc_count_zeros* (type arg)
+unsigned int *__builtin_stdc_first_leading_one* (type arg)
+unsigned int *__builtin_stdc_first_leading_zero* (type arg)
+unsigned int *__builtin_stdc_first_trailing_one* (type arg)
+unsigned int *__builtin_stdc_first_trailing_zero* (type arg)
+unsigned int *__builtin_stdc_has_single_bit* (type arg)
+unsigned int *__builtin_stdc_leading_ones* (type arg)
+unsigned int *__builtin_stdc_leading_zeros* (type arg)
+unsigned int *__builtin_stdc_trailing_ones* (type arg)
+unsigned int *__builtin_stdc_trailing_zeros* (type arg)
+
+double *__builtin_powi* (double, int)
+float *__builtin_powif* (float, int)
+long double *__builtin_powil* (long double, int)
+
+Returns the first argument raised to the power of the second. Unlike
+the pow function no guarantees about precision and rounding are made.
+
+uint16_t *__builtin_bswap16* (uint16_t x)
+uint32_t *__builtin_bswap32* (uint32_t x)
+uint64_t *__builtin_bswap64* (uint64_t x)
+uint128_t *__builtin_bswap128* (uint128_t x)
+
+Returns x with the order of the bytes reversed; for example, 0xaabb
+becomes 0xbbaa. Byte here always means exactly 8 bits.
+
 Retrieved from GCC documentation on 2024-06-19
-https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gcc/Other-Builtins.html
+https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
 
 vim:tw=78:ts=8:noet:ft=help:norl:
