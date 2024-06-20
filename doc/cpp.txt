@@ -107,4 +107,54 @@ C++20                                         *C++20* ~
 
 - std::erase, std::erase_if to replace the erase-remove idiom
 
+GCC Builtins                                  *builtin* *builtins* ~
+
+bool *__builtin_types_compatible_p* (type1, type2)
+
+type *__builtin_choose_expr* (const_exp, exp1, exp2)
+
+bool *__builtin_constant_p* (exp)
+
+void *__builtin_prefetch* (const void *addr, ...)
+
+long *__builtin_expect* (long exp, long c)
+
+Branch prediction hint.
+
+int *__builtin_clz* (unsigned int x)
+int *__builtin_clzl* (unsigned long)
+int *__builtin_clzll* (unsigned long long)
+
+Returns the number of leading 0-bits in x, starting at the most
+significant bit position. If x is 0, the result is undefined.
+
+int *__builtin_ctz* (unsigned int x)
+int *__builtin_ctzl* (unsigned long)
+int *__builtin_ctzll* (unsigned long long)
+
+Returns the number of trailing 0-bits in x, starting at the
+least significant bit position. If x is 0, the result is undefined.
+
+int *__builtin_ffs* (unsigned int x)
+int *__builtin_ffsl* (unsigned long)
+int *__builtin_ffsll* (unsigned long long)
+
+Returns one plus the index of the least significant 1-bit of x,
+or if x is zero, returns zero.
+
+int *__builtin_parity* (unsigned int x)
+int *__builtin_parityl* (unsigned long)
+int *__builtin_parityll* (unsigned long long)
+
+Returns the parity of x, i.e. the number of 1-bits in x modulo 2.
+
+int *__builtin_popcount* (unsigned int x)
+int *__builtin_popcountl* (unsigned long)
+int *__builtin_popcountll* (unsigned long long)
+
+Returns the number of 1-bits in x.
+
+Retrieved from GCC documentation on 2024-06-19
+https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gcc/Other-Builtins.html
+
 vim:tw=78:ts=8:noet:ft=help:norl:
